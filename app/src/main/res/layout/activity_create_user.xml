@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".CreateUser">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="67dp"
+        android:layout_weight="1"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="Add Details" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:padding="12dp"
+        android:backgroundTint="@color/colourline"
+        android:textCursorDrawable="@color/colouritem"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:backgroundTint="@color/colourline"
+        android:textCursorDrawable="@color/colouritem"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Phone No"
+        android:inputType="phone"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/colourline"
+        android:textCursorDrawable="@color/colouritem"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="City"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:padding="12dp"
+        android:backgroundTint="@color/colourline"
+        android:textCursorDrawable="@color/colouritem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+
+        android:hint="Address"
+        android:inputType="textMultiLine"
+        android:lines="2"
+        android:gravity="top"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colourline"
+        android:textCursorDrawable="@color/colouritem"
+        android:layout_weight="1"
+        android:ems="10"
+        android:padding="12dp"
+        android:hint="Opening Balance"
+        android:inputType="numberDecimal"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:padding="12dp"
+        android:backgroundTint="@color/colourline"
+        android:textCursorDrawable="@color/colouritem"
+        android:inputType="number"
+        android:hint="Default No. Of Days To Alert"
+        android:text="" />
+
+</LinearLayout>

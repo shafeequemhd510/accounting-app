@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ln2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:layout_margin="1dp"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="240dp"
+        android:layout_height="49dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Discription"
+        android:textAlignment="textStart"
+        android:textColor="#000"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="95dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="86dp"
+
+        android:padding="8sp"
+        android:text=""
+        tools:text="debit"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="92dp"
+        android:layout_height="46dp"
+        android:padding="8sp"
+        android:text=""
+
+        android:textSize="18sp"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView18"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="credit"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

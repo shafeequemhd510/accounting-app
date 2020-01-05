@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionOverflowButtonStyle">@style/DotsDarkTheme</item>
+        <item name="popupTheme">@style/PopupTheme</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorPrimary</item>
+    </style>
+
+    <style name="PopupTheme" parent="Theme.AppCompat.Light">
+        <item name="android:background">@color/colorbackground</item>
+        <item name="android:textColor">@color/colouritem</item>
+    </style>
+
+    <style name="DotsDarkTheme" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+
+        <item name="android:tint">@color/colouritem</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyAccounts</string>
+    <string name="order_action">orderaction</string>
+</resources>
