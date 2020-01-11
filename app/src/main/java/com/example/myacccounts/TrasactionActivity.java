@@ -45,14 +45,13 @@ public class TrasactionActivity extends AppCompatActivity {
     private static String openingBalance ;
     private RecyclerView recyclerView2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onclick);
+        setContentView(R.layout.activity_transaction);
+
         creditButton = findViewById(R.id.imageButton);
         debitButton = findViewById(R.id.imageButton2);
-
         tv = findViewById(R.id.textView);
         tv2 = findViewById(R.id.textView2);
         tv3 = findViewById(R.id.textView3);
@@ -65,27 +64,21 @@ public class TrasactionActivity extends AppCompatActivity {
         creditAmt = findViewById(R.id.credit_id);
         closingAmt = findViewById(R.id.closingBalance_id);
 
-
-
         creditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent credit = new Intent(getApplicationContext(), Creditpage.class);
+                Intent credit = new Intent(getApplicationContext(), CreditPageActivity.class);
                 credit.putExtra("id", id);
                 startActivity(credit);
-
-
             }
         });
 
         debitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent debit = new Intent(getApplicationContext(), Debitpage.class);
+                Intent debit = new Intent(getApplicationContext(), DebitPageActivity.class);
                 debit.putExtra("id", id);
                 startActivity(debit);
-
-
             }
         });
 
@@ -95,25 +88,17 @@ public class TrasactionActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-//                ln2.setVisibility(View.VISIBLE);
                 visible = !visible;
                 ln2.setVisibility(visible ? View.VISIBLE : View.GONE);
-
-
             }
         });
-
 
         toolbar3 = (Toolbar) findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar3);
         setTitle("Ledger");
-
-
         recyclerView2 = findViewById(R.id.rv2);
 
     }
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -122,9 +107,7 @@ public class TrasactionActivity extends AppCompatActivity {
         String nmbr;
         String place;
         String address;
-
         String days;
-
 
         trasactionList.clear();
         double creditSum = 0;
@@ -139,26 +122,26 @@ public class TrasactionActivity extends AppCompatActivity {
             nmbr = getIntent().getStringExtra("nmbr");
             openingBalance = getIntent().getStringExtra("openingBalance");
 
-            trasactionList.add(new Trasaction(null,openingBalance,"opening"));
+            trasactionList.add(new Trasaction(null,null,openingBalance,"opening"));
 
             tv.setText(name);
             tv2.setText(nmbr);
             tv3.setText(address);
             tv4.setText(place);
-//            tv6.setText((openingBalance+""))
         }
-
         opBlnce=Double.parseDouble(openingBalance);
         debitSum=opBlnce;
         DbHelper dbHelper = new DbHelper(this);
-        Cursor cursor = dbHelper.transactionDetails(id);
+        Cursor cursor = dbHelper.getTransactionDetails(id);
 
         while (cursor.moveToNext()) {
+            String idTransaction = cursor.getString(cursor.getColumnIndex(dbHelper.col_ID));
             String credit = cursor.getString(cursor.getColumnIndex(dbHelper.col_credit));
             String debit = cursor.getString(cursor.getColumnIndex(dbHelper.col_debit));
             String discription = cursor.getString(cursor.getColumnIndex(dbHelper.col_discription));
-//            debit=debit+openingBalance;
-            trasactionList.add(new Trasaction(credit, debit, discription));
+
+            trasactionList.add(new Trasaction(idTransaction,credit, debit, discription));
+
             if (credit!=null && !credit.isEmpty()) {
                 creditSum = creditSum + Double.parseDouble(credit);
             }
@@ -178,7 +161,6 @@ public class TrasactionActivity extends AppCompatActivity {
             closingAmt.setText(String.valueOf(Math.abs(closingBalance))  );
         }
 */
-
         indicator=findViewById(R.id.indication_id);
         if (closingBalance>0){
             indicator.setText("Cr");}

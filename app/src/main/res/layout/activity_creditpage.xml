@@ -5,7 +5,7 @@
     android:id="@+id/discriptioncredit_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Creditpage">
+    tools:context="com.example.myacccounts.CreditPageActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar4"

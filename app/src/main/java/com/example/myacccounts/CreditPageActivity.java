@@ -1,17 +1,19 @@
 package com.example.myacccounts;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.myaccounts.R;
 
-public class Creditpage extends AppCompatActivity {
+public class CreditPageActivity extends AppCompatActivity {
 
     public static String id;
 
@@ -27,7 +29,7 @@ public class Creditpage extends AppCompatActivity {
     DbHelper mydb;
     Layout ln2;
 
-
+    String textvar7;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,20 +52,35 @@ public class Creditpage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.done_idcredit:
-                String textvar7 = et7.getText().toString();
-                String textvar10 = discriptionCredit.getText().toString();
-                DbHelper dbHelper2 = new DbHelper(getApplicationContext());
-                dbHelper2.insertTransaction(id,textvar7,null,textvar10);
+                if (et7.getText().toString().isEmpty()){
+
+                    AlertDialog.Builder builder=new AlertDialog.Builder(CreditPageActivity.this);
+                    builder.setCancelable(true);
+                    builder.setTitle("Error!!!");
+                    builder.setMessage("Field Amount Cannot be empty");
+                    builder.setPositiveButton("Ok! Got It", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    builder.show();
+                }
+                else {
+                    textvar7 = et7.getText().toString();
+                    String textvar10 = discriptionCredit.getText().toString();
+                    DbHelper dbHelper2 = new DbHelper(getApplicationContext());
+                    dbHelper2.insertTransaction(id, textvar7, null, textvar10);
 //                dbHelper2.insertTransaction(userId);
 
 
-               finish();
+                    finish();
 
 
                /* Intent intent3 = new Intent(getApplicationContext(), TrasactionActivity.class);
                 startActivity(intent3);*/
-                return true;
-
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

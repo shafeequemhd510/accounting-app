@@ -85,9 +85,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
                         Toast.makeText(v.getContext(), "yes deleted", Toast.LENGTH_SHORT).show();
                         DbHelper dbHelper= new DbHelper(v.getContext());
                         dbHelper.deleteRow(user.id);
+
                         users.remove(position);//hugyugujg
 //                        notifyDataSetChanged();
                         notifyItemChanged(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, users.size());
 
                     }
                 });

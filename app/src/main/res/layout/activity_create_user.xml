@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".CreateUser">
+    tools:context="com.example.myacccounts.CreateUserActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"

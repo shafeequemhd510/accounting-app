@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.myacccounts.Debitpage"></activity>
-        <activity android:name="com.example.myacccounts.Creditpage" />
+        <activity android:name="com.example.myacccounts.DebitPageActivity"></activity>
+        <activity android:name="com.example.myacccounts.CreditPageActivity" />
         <activity android:name="com.example.myacccounts.TrasactionActivity" />
-        <activity android:name="com.example.myacccounts.CreateUser" />
+        <activity android:name="com.example.myacccounts.CreateUserActivity" />
         <activity android:name="com.example.myacccounts.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

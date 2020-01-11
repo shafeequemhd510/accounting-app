@@ -37,10 +37,6 @@ class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-
-          /*db.execSQL("create table "+userDetails+"( "+col_ID+" INTEGER PRIMARY KEY AUTOINCREMENT , "+ col_Name+" TEXT , "+ col_phoneNmbr+" TEXT , "+col_city+" TEXT ,"+col_address+" TEXT" +
-                  " ,"+ col_openingBalance+" INTEGER ,"+col_days+" INTEGER )");*/
-
           db.execSQL("create table "+userDetails+"( "+col_ID+" INTEGER PRIMARY KEY AUTOINCREMENT ," +
                   " "+ col_Name+" TEXT , "+ col_phoneNmbr+" TEXT , "+col_city+" TEXT ,"+col_address+" TEXT" +
                   " ,"+ col_openingBalance+" INTEGER ,"+col_days+" INTEGER,"+col_closingBalance+" INTEGER  )");
@@ -50,10 +46,6 @@ class DbHelper extends SQLiteOpenHelper {
                 col_discription+" TEXT)");
                 Log.d("vw","query "+sqlTable2);
         db.execSQL(sqlTable2);
-
-
-
-
 
     }
 
@@ -86,13 +78,12 @@ public Cursor getUserDetails(){
         return cursor;
 
 }
-public Cursor transactionDetails(String userId){
+public Cursor getTransactionDetails(String userId){
     Log.d("vw","get user in dbhelper (gud)");
         SQLiteDatabase db=getReadableDatabase();
         String query="Select * from "+transaction+" where "+col_userID+"="+userId ;
         Cursor cursor=db.rawQuery(query,null);
         return cursor;
-
 }
 
     public void insertTransaction(String userId, String credit  , String debit , String discription ) {
@@ -122,8 +113,16 @@ public Cursor transactionDetails(String userId){
       db.execSQL("DELETE FROM " +transaction + " WHERE "+col_userID+"='"+userId+"'");
       db.close();
   }
+  public void deleteRowTransaction(String userId){
 
+    SQLiteDatabase db = this.getWritableDatabase();
+      db.execSQL("DELETE FROM " +transaction + " WHERE "+col_ID+"='"+userId+"'");
+    db.close();
+  }
+  public void deleteOpeningBalance(String userId){
 
+    SQLiteDatabase db = this.getWritableDatabase();
+      db.execSQL("DELETE FROM " +userDetails + " WHERE "+col_openingBalance+"='"+userId+"'");
+      db.close();
+  }
     }
-
-

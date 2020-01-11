@@ -4,14 +4,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Trasaction implements Parcelable {
+    String id;
     String credit;
     String debit;
     String discription;
 
 
 
-    public Trasaction(String credit, String debit , String discription){
+    public Trasaction(String id, String credit, String debit , String discription){
 
+        this.id=id;
         this.credit=credit;
         this.debit=debit;
         this.discription=discription;

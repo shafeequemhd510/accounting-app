@@ -1,7 +1,11 @@
 package com.example.myacccounts;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,17 +17,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.myacccounts.CreateUser;
-import com.example.myacccounts.DbHelper;
-import com.example.myacccounts.TrasactionActivity;
-import com.example.myacccounts.UserAdapter;
-import com.example.myacccounts.Users;
 import com.example.myaccounts.R;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements UserAdapter.OnNoteListener {
 
+public class MainActivity extends AppCompatActivity implements UserAdapter.OnNoteListener {
+    private AppBarConfiguration mAppBarConfiguration;
+
+    DrawerLayout drawer ;
+    NavigationView navigationView ;
     Toolbar toolbar;
     public static final ArrayList<Users> users = new ArrayList<Users>();
 
@@ -81,7 +85,20 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnNot
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
+        final ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+
+
+       /* mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                .setDrawerLayout(drawer)
+                .build();*/
 
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -96,16 +113,23 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnNot
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.add_user:
-                Intent i = new Intent(this, CreateUser.class);
+                Intent i = new Intent(this, CreateUserActivity.class);
                 this.startActivity(i);
+//                finish();
                 return true;
+
+
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
 
     }
-
 
     @Override
     public void OnNoteClick(Users users) {
@@ -123,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnNot
 
     public double closingAmt(String openingBalance, String id) {
         DbHelper dbHelper = new DbHelper(this);
-        Cursor cursor = dbHelper.transactionDetails(id);
+        Cursor cursor = dbHelper.getTransactionDetails(id);
         ArrayList<Trasaction> trasactionList = new ArrayList<Trasaction>();
         double creditSum = 0;
         double debitSum = 0;
@@ -134,11 +158,12 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnNot
         debitSum=opBlnce;
 
         while (cursor.moveToNext()) {
+            String TransactionId = cursor.getString(cursor.getColumnIndex(dbHelper.col_ID));
             String credit = cursor.getString(cursor.getColumnIndex(dbHelper.col_credit));
             String debit = cursor.getString(cursor.getColumnIndex(dbHelper.col_debit));
             String discription = cursor.getString(cursor.getColumnIndex(dbHelper.col_discription));
 //            debit=debit+openingBalance;
-            trasactionList.add(new Trasaction(credit, debit, discription));
+            trasactionList.add(new Trasaction(TransactionId,credit, debit, discription));
             if (credit != null && !credit.isEmpty()) {
                 creditSum = creditSum + Double.parseDouble(credit);
             }

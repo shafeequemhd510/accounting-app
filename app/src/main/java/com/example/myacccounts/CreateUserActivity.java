@@ -19,7 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.myaccounts.R;
 
-public class CreateUser extends AppCompatActivity{
+public class CreateUserActivity extends AppCompatActivity{
 
 
     private static final int RESULT_PICK_CONTACT = 1;
@@ -84,7 +84,7 @@ public class CreateUser extends AppCompatActivity{
 
             if (name.isEmpty()){
 
-                AlertDialog.Builder builder=new AlertDialog.Builder(CreateUser.this);
+                AlertDialog.Builder builder=new AlertDialog.Builder(CreateUserActivity.this);
                 builder.setCancelable(true);
                 builder.setTitle("Error!!!");
                 builder.setMessage("Field Name Cannot be empty");
@@ -101,12 +101,13 @@ public class CreateUser extends AppCompatActivity{
                 dbHelper.insertUserDetails(name,phonenumber,place,address,opBalance,noDays);
                 Log.d("vw","create user (iud)");
 
-                dbHelper.insertTransaction(null,null,opBalance,null);
+//                dbHelper.insertTransaction(null,null,opBalance,null);
 
 
                 Toast.makeText(this, "User saved successfully", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(getApplicationContext(), com.example.myacccounts.MainActivity.class);
-                startActivity(intent2);
+//                Intent intent2 = new Intent(getApplicationContext(), com.example.myacccounts.MainActivity.class);
+//                startActivity(intent2);
+                finish();
 
             }
 

@@ -1,12 +1,15 @@
 package com.example.myacccounts;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myaccounts.R;
@@ -34,8 +37,8 @@ public class UserAdapter2 extends RecyclerView.Adapter<UserAdapter2.UserHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        Trasaction transaction = trasaction.get(position);
+    public void onBindViewHolder(@NonNull final UserHolder holder,final int position) {
+        final Trasaction transaction = trasaction.get(position);
 
         holder.tv6.setText(transaction.discription);
         if(transaction.credit==null){
@@ -45,8 +48,40 @@ public class UserAdapter2 extends RecyclerView.Adapter<UserAdapter2.UserHolder> 
             holder.itemView.setBackgroundColor(Color.rgb(177,251,153));
             holder.tv5.setText(String.format("%.2f",Double.parseDouble(transaction.credit)));
         }
-//        holder.tv6.setText(trasactionList.get(position).debit);
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(final View  v) {
+                    Toast.makeText(v.getContext(), "longclick", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder=new AlertDialog.Builder(v.getContext());
+                    builder.setCancelable(true);
+                    builder.setTitle("Delete!!!");
+                    builder.setMessage("Do you want to delete?");
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(v.getContext(), "not deleted", Toast.LENGTH_SHORT).show();
 
+                        }
+                    });
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(v.getContext(), "yes deleted", Toast.LENGTH_SHORT).show();
+                            DbHelper dbHelper= new DbHelper(v.getContext());
+                            dbHelper.deleteRowTransaction(transaction.id);
+                            trasaction.remove(position);//hugyugujg
+//                        notifyDataSetChanged();
+                            notifyItemChanged(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, trasaction.size());
+
+                        }
+                    });
+                    builder.show();
+
+                    return true;
+                }
+            });
     }
 
     @Override
